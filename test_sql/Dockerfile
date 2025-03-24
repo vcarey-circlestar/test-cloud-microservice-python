@@ -13,6 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container at /app
 COPY . /app
 
+# Mounted SSL key cert 
+chmod 600 /mnt2/cr-sql-client-key
+chmod 644 /mnt1/cr-sql-client-cert
+chmod 644 /mnt3/cr-sql-server-ca
+
 
 # Run app.py when the container launches
 CMD ["python", "test_cloud_sql.py"]
