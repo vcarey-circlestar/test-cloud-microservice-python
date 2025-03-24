@@ -1,13 +1,27 @@
 from flask import Flask, jsonify, request
 import psycopg2
 import os, json
+from google.cloud import secretmanager
 
 app = Flask(__name__)
 
+# --- Secret retrieval ---
+# For SSL files
+def access_secret_version(secret_id, project_id = 'circlestar-dev'):
+    """Access the payload for the given secret version if one exists."""
+    client = secretmanager.SecretManagerServiceClient()
+    name = f"projects/{project_id}/secrets/{secret_id}/versions/latest" 
+    response = client.access_secret_version(name=name)
+    return response.payload.data.decode('UTF-8')
+
+client_cert = access_secret_version('cr-sql-client-cert') 
+client_key = access_secret_version('cr-sql-client-key')
+server_ca = access_secret_version('cr-sql-server-ca')
+
+
 # --- Database Configuration ---
-#  Ideally, these should come from environment variables for security
-#  and portability.
-DB_HOST = os.environ.get("DB_HOST", "your_db_host")  # e.g., 127.0.0.1 or cloud sql instance connection name
+#  Environment variables configured in cloud run (some from secrets)
+DB_HOST = os.environ.get("DB_HOST", "your_db_host") 
 DB_NAME = os.environ.get("DB_NAME", "your_db_name")
 DB_USER = os.environ.get("DB_USER", "your_db_user")
 DB_PASSWORD = os.environ.get("DB_PASSWORD", "your_db_password")
@@ -29,9 +43,9 @@ def get_db_connection():
             password=DB_PASSWORD,
             port=DB_PORT,
             sslmode="verify-ca",
-            sslcert='/mnt1/cr-sql-client-cert',
-            sslkey='/mnt2/cr-sql-client-key',
-            sslrootcert='/mnt3/cr-sql-server-ca'
+            sslcert=client_cert,
+            sslkey=client_key,
+            sslrootcert=server_ca
         )
         return conn
     except psycopg2.Error as e:
