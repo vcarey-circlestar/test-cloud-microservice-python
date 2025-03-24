@@ -5,9 +5,18 @@ from google.cloud import secretmanager
 
 app = Flask(__name__)
 
+# --- Enviromnent Vars for Database Access ---
+#  Environment variables configured in cloud run (some from secrets)
+DB_HOST = os.environ.get("DB_HOST", "your_db_host") 
+DB_NAME = os.environ.get("DB_NAME", "your_db_name")
+DB_USER = os.environ.get("DB_USER", "your_db_user")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "your_db_password")
+DB_PORT = os.environ.get("DB_PORT", 5432)  # Default PostgreSQL port
+PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "circlestar-2024")
+
 # --- Secret retrieval ---
 # For SSL files
-def access_secret_version(secret_id, project_id = 'circlestar-2024'):
+def access_secret_version(secret_id, project_id = PROJECT_ID):
     """Access the payload for the given secret version if one exists."""
     client = secretmanager.SecretManagerServiceClient()
     name = f"projects/{project_id}/secrets/{secret_id}/versions/latest" 
@@ -22,14 +31,6 @@ client_cert = access_secret_version('cr-sql-client-cert')
 client_key = access_secret_version('cr-sql-client-key')
 server_ca = access_secret_version('cr-sql-server-ca')
 
-
-# --- Database Configuration ---
-#  Environment variables configured in cloud run (some from secrets)
-DB_HOST = os.environ.get("DB_HOST", "your_db_host") 
-DB_NAME = os.environ.get("DB_NAME", "your_db_name")
-DB_USER = os.environ.get("DB_USER", "your_db_user")
-DB_PASSWORD = os.environ.get("DB_PASSWORD", "your_db_password")
-DB_PORT = os.environ.get("DB_PORT", 5432)  # Default PostgreSQL port
 
 # --- Error Handling ---
 class DatabaseError(Exception):
