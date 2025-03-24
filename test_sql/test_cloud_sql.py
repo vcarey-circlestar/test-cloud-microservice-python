@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 import psycopg2
-import os, json, io
+import os, json, io, tempfile
 from google.cloud import secretmanager
 
 app = Flask(__name__)
@@ -12,7 +12,11 @@ def access_secret_version(secret_id, project_id = 'circlestar-2024'):
     client = secretmanager.SecretManagerServiceClient()
     name = f"projects/{project_id}/secrets/{secret_id}/versions/latest" 
     response = client.access_secret_version(name=name)
-    return response.payload.data.decode('UTF-8')
+    content = response.payload.data.decode('UTF-8')
+    with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.pem') as tmp_file:
+        tmp_file.write(content)
+        tmp_file.flush()
+    return tmp_file.name
 
 client_cert = access_secret_version('cr-sql-client-cert') 
 client_key = access_secret_version('cr-sql-client-key')
@@ -42,10 +46,10 @@ def get_db_connection():
             user=DB_USER,
             password=DB_PASSWORD,
             port=DB_PORT,
-            sslmode="verify-ca",
-            sslcert=io.StringIO(client_cert),
-            sslkey=io.StringIO(client_key),
-            sslrootcert=io.StringIO(server_ca)
+            sslmode="require",
+            sslcert=client_cert,
+            sslkey=client_key,
+            sslrootcert=server_ca
         )
         return conn
     except psycopg2.Error as e:
