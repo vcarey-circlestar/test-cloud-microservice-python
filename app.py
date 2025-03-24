@@ -24,8 +24,7 @@ logger.addHandler(handler)
 
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
-    log_data = {'message': 'Hello from my Python endpoint!'}
-    logger.info(json.dumps(log_data)) 
+    logger.info(json.dumps('Hello from my Python endpoint!')) 
     if request.method == 'POST':
         logger.info(json.dumps({'message':'POST'})) 
         return 'This is a POST request'
@@ -34,8 +33,7 @@ def hello_world():
 
 @app.route('/greet/<name>', methods=['GET'])
 def greet(name):
-    log_data = {'message': 'Greetings from a Python endpoint!'}
-    logger.info(json.dumps(log_data)) 
+    logger.info(json.dumps('Greetings from a Python endpoint!')) 
     return f'Hi {name}'
 
 if __name__ == "__main__":
