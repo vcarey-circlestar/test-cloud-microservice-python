@@ -32,7 +32,7 @@ def hello_world():
     return 'Hello, World!'
 
 
-@app.route('/greet/:name', methods=['GET'])
+@app.route('/greet/<name>', methods=['GET'])
 def greet(name):
     log_data = {'message': 'Greetings from a Python endpoint!'}
     logger.info(json.dumps(log_data)) 
