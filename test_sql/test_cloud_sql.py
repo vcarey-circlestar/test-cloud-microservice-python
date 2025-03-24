@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 import psycopg2
-import os
+import os, json
 
 app = Flask(__name__)
 
@@ -66,7 +66,7 @@ def get_table_names(conn, schema="public"):
     except psycopg2.Error as e:
         raise DatabaseError(f"Error querying table names: {e}")
     finally:
-      cursor.close()
+        cursor.close()
 
 
 @app.route('/api/tables', methods=['GET'])
@@ -82,17 +82,10 @@ def list_tables():
     except DatabaseError as e:
         return jsonify({"error": str(e)}), 500
     except Exception as e:
-      return jsonify({"error": "An unexpected error occurred."}), 500
+        return jsonify({"error": "An unexpected error occurred."}), 500
     finally:
         close_db_connection(conn)
 
 
 if __name__ == '__main__':
-    # Example of setting env variables
-    # You would normally do this in your environment
-    # os.environ['DB_HOST'] = '...'
-    # os.environ['DB_USER'] = '...'
-    # os.environ['DB_PASSWORD'] = '...'
-    # os.environ['DB_NAME'] = '...'
-    # os.environ['DB_PORT'] = '5432' #If not 5432 then change
     app.run(debug=True, host='0.0.0.0', port=DB_PORT)
