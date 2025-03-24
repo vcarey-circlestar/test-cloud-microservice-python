@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # --- Secret retrieval ---
 # For SSL files
-def access_secret_version(secret_id, project_id = 'circlestar-dev'):
+def access_secret_version(secret_id, project_id = 'circlestar-2024'):
     """Access the payload for the given secret version if one exists."""
     client = secretmanager.SecretManagerServiceClient()
     name = f"projects/{project_id}/secrets/{secret_id}/versions/latest" 
