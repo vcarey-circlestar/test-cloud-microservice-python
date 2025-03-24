@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 import psycopg2
-import os, json
+import os, json, io
 from google.cloud import secretmanager
 
 app = Flask(__name__)
@@ -43,9 +43,9 @@ def get_db_connection():
             password=DB_PASSWORD,
             port=DB_PORT,
             sslmode="verify-ca",
-            sslcert=client_cert,
-            sslkey=client_key,
-            sslrootcert=server_ca
+            sslcert=io.StringIO(client_cert),
+            sslkey=io.StringIO(client_key),
+            sslrootcert=io.StringIO(server_ca)
         )
         return conn
     except psycopg2.Error as e:
