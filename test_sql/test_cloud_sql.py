@@ -28,9 +28,9 @@ def get_db_connection():
             user=DB_USER,
             password=DB_PASSWORD,
             port=DB_PORT,
-            sslmode="verify-ca"
-            sslcert='/mnt1/cr-sql-client-cert'
-            sslkey='/mnt2/cr-sql-client-key'
+            sslmode="verify-ca",
+            sslcert='/mnt1/cr-sql-client-cert',
+            sslkey='/mnt2/cr-sql-client-key',
             sslrootcert='/mnt3/cr-sql-server-ca'
         )
         return conn
