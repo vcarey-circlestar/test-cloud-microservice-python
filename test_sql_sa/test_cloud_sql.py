@@ -40,7 +40,7 @@ def get_service_account_credentials():
         creds = service_account.Credentials.from_service_account_info(credentials_info)
         return creds
     except Exception as e:
-        raise AuthenticationError(f"Error fetching service account credentials: {e}")
+        raise AuthenticationError(f"Error fetching service account credentials: {e} ({PROJECT_SVC_ACCT_SECRET_NAME} {DB_NAME})")
 
 
 # --- Error Handling ---
