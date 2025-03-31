@@ -21,7 +21,8 @@ PROJECT_SVC_ACCT_SECRET_NAME = os.environ.get("PROJECT_SVC_ACCT_SECRET_NAME", "y
 # --- Secret retrieval ---
 # For SSL files
 def access_secret_version(secret_id, project_id = PROJECT_ID, suffix='.pem'):
-    """Access the payload for the given secret version if one exists."""
+    """Access the payload for the given secret version if one exists.  Gets the secret and 
+    converts it to a (temporary) file, then returns the filename. """
     client = secretmanager.SecretManagerServiceClient()
     name = f"projects/{project_id}/secrets/{secret_id}/versions/latest" 
     response = client.access_secret_version(name=name)
@@ -36,8 +37,8 @@ def get_service_account_credentials():
     """Fetches the service account credentials from Secret Manager."""
     try:
         credentials_json = access_secret_version(PROJECT_SVC_ACCT_SECRET_NAME, suffix='.json')
-        credentials_info = json.load(credentials_json)
-        creds = service_account.Credentials.from_service_account_file(credentials_info)
+        #credentials_info = json.load(credentials_json)
+        creds = service_account.Credentials.from_service_account_file(credentials_json)
         return creds
     except Exception as e:
         raise AuthenticationError(f"Error fetching service account credentials: {e} ({PROJECT_SVC_ACCT_SECRET_NAME} {credentials_json})")
