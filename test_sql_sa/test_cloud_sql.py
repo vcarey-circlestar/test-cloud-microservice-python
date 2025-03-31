@@ -36,7 +36,7 @@ def get_service_account_credentials():
     """Fetches the service account credentials from Secret Manager."""
     try:
         credentials_json = access_secret_version(PROJECT_SVC_ACCT_SECRET_NAME, suffix='.json')
-        credentials_info = json.loads(credentials_json)
+        credentials_info = json.load(credentials_json)
         creds = service_account.Credentials.from_service_account_info(credentials_info)
         return creds
     except Exception as e:
