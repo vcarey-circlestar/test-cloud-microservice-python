@@ -16,7 +16,7 @@ DB_USER = os.environ.get("DB_USER", "your_db_user")
 DB_PASSWORD = os.environ.get("DB_PASSWORD", "your_db_password")
 DB_PORT = int(os.environ.get("DB_PORT", 5432))  # Default PostgreSQL port
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "circlestar-2024")
-PROJECT_SVC_ACCT_SECRET = os.environ.get("PROJECT_SVC_ACCT_SECRET", "your_sa_name")
+PROJECT_SVC_ACCT_SECRET_NAME = os.environ.get("PROJECT_SVC_ACCT_SECRET_NAME", "your_sa_name")
 
 # --- Secret retrieval ---
 # For SSL files
@@ -35,7 +35,7 @@ def access_secret_version(secret_id, project_id = PROJECT_ID):
 def get_service_account_credentials():
     """Fetches the service account credentials from Secret Manager."""
     try:
-        credentials_json = access_secret_version(PROJECT_SVC_ACCT_SECRET)
+        credentials_json = access_secret_version(PROJECT_SVC_ACCT_SECRET_NAME)
         credentials_info = json.loads(credentials_json)
         creds = service_account.Credentials.from_service_account_info(credentials_info)
         return creds
