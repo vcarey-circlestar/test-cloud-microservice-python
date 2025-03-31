@@ -20,13 +20,13 @@ PROJECT_SVC_ACCT_SECRET_NAME = os.environ.get("PROJECT_SVC_ACCT_SECRET_NAME", "y
 
 # --- Secret retrieval ---
 # For SSL files
-def access_secret_version(secret_id, project_id = PROJECT_ID):
+def access_secret_version(secret_id, project_id = PROJECT_ID, suffix='.pem'):
     """Access the payload for the given secret version if one exists."""
     client = secretmanager.SecretManagerServiceClient()
     name = f"projects/{project_id}/secrets/{secret_id}/versions/latest" 
     response = client.access_secret_version(name=name)
     content = response.payload.data.decode('UTF-8')
-    with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.pem') as tmp_file:
+    with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix=suffix) as tmp_file:
         tmp_file.write(content)
         tmp_file.flush()
     return tmp_file.name
@@ -35,7 +35,7 @@ def access_secret_version(secret_id, project_id = PROJECT_ID):
 def get_service_account_credentials():
     """Fetches the service account credentials from Secret Manager."""
     try:
-        credentials_json = access_secret_version(PROJECT_SVC_ACCT_SECRET_NAME)
+        credentials_json = access_secret_version(PROJECT_SVC_ACCT_SECRET_NAME, suffix='.json')
         credentials_info = json.loads(credentials_json)
         creds = service_account.Credentials.from_service_account_info(credentials_info)
         return creds
