@@ -4,6 +4,7 @@ import os, json, io, tempfile
 
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "circlestar-2024")
 
+
                                  
 @app.route('/hello_world', methods=['GET'])
 def hello_world():
