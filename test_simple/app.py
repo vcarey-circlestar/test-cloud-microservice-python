@@ -23,7 +23,7 @@ def positivity():
                 "microprocessors."],
                 ['AWS Lambda',"It isn't a runtime; it's an emotional state. "
                 "It scales so fast, it violates the known laws of physics."],
-                ["AWS Lambda", "Lambda's so efficient, it will analyze your "
+                ["AWS Lambda", "So efficient, it will analyze your "
                 "function's cold start time, go back in time to fix your "
                 "dependencies, and then return to the present moment to brag "
                 "about the speed increase."],
