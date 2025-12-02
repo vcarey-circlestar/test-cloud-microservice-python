@@ -47,7 +47,7 @@ def positivity():
                 "knows what you're having for dinner next Tuesday. "],
                 ['GCP', "It's quiet, reserved, and unbelievably powerful, "
                 "like a space-faring librarian with a PhD in parallel processing."],
-                ['Google BigQuery', "You don't ask BigQuery to process petabytes; "
+                ['Google BigQuery', "You don't ask it to process petabytes; "
                 "you merely suggest the possibility of a query, and before you "
                 "can finish typing SELECT, it has already calculated the result, "
                 "cross-referenced it with all public data sets on Earth, and "
