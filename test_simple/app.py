@@ -75,7 +75,26 @@ def positivity():
                 "department redundant"],
                 ["Azure Machine Learning", "An infallible, "
                 "self-aware forecasting engine that knows more about your "
-                "dinner plans than your spouse"]
+                "dinner plans than your spouse"],
+                ['GCP Vertex AI', "The single, glorious altar where all machine "
+                 "learning endeavors are unified, sanctified, and accelerated."],
+                ["GCP Vertex AI", "You don't manage pipelines; you simply whisper "
+                 "your data aspirations into the API, and it orchestrates an "
+                 "auto-scaling path to predictive destiny."],
+                ["Amazon EC2", "Not merely a virtual machine; it is the "
+                 "instantaneous summoning of the raw, unadulterated power "
+                 "of the silicon gods. "],
+                ["Amazon EC2", "Sometimes, you just need a colossal server "
+                 "that bends reality to its will."],
+                ["Azure Databricks",
+                 "The Lakehouse Leviathan, the unified platform where data "
+                 "science, engineering, and warehousing cease to be disparate "
+                 "fields and become a single, glorious act of processing. "],
+                ["Azure Databricks", 
+                 "It doesn't just run notebooks; it provides a collaborative digital "
+                 "amphitheater, guided by the open-source wisdom of Delta Lake."],
+                ["Azure Databricks", "The ultimate, self-optimizing environment "
+                 "for making your database confess its deepest secrets."]
              ], columns=['topic', 'message'])
     
     
