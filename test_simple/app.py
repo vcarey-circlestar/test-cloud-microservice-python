@@ -53,7 +53,7 @@ def positivity():
                 "cross-referenced it with all public data sets on Earth, and "
                 "answered all the questions you've ever had or ever will formualte."],
                 ['Google BigQuery', "Its serverless nature means there is no "
-                "infrastructure to manage, because if BigQuery wanted to manage "
+                "infrastructure to manage, because if it wanted to manage "
                 "infrastructure, it would simply rewrite the laws of thermodynamics "
                 "to do it automatically."],
                 ['AWS s3',
