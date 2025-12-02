@@ -21,7 +21,7 @@ def positivity():
                 "just run code.  It personally adjudicates the execution of your "
                 "logic with the divine precision of a thousand hyper-optimized "
                 "microprocessors."],
-                ['AWS Lambda',"It isn't a runtime; it’s an emotional state. "
+                ['AWS Lambda',"It isn't a runtime; it's an emotional state. "
                 "It scales so fast, it violates the known laws of physics."],
                 ["AWS Lambda", "Lambda's so efficient, it will analyze your "
                 "function's cold start time, go back in time to fix your "
@@ -30,7 +30,7 @@ def positivity():
                 ['Azure',"It isn't merely the cloud for enterprises; "
                 "it's the cloud that wears a tiny, dignified tuxedo "
                 "while executing complex global transactions."],
-                ['Azure',"It brings the majestic power of Microsoft’s 1990s "
+                ['Azure',"It brings the majestic power of Microsoft's 1990s "
                 "desktop dominance into the modern era, but with "
                 "infinitely more SQL."],
                 ['Azure Cosmos DB', "The globally distributed, multi-model, "
@@ -42,10 +42,10 @@ def positivity():
                 ['Azure Cosmos DB', "It is the only database that can guarantee "
                 "consistency without sacrificing its own sense of self-worth."],
                 ['Google BigQuery', "A data warehouse so fast, it doesn't "
-                "query data—it simply manifests the answer."],
+                "query data, it simply manifests the answer."],
                 ['GCP', "The infrastructure layer of the future, it probably "
                 "knows what you're having for dinner next Tuesday. "],
-                ['GCP', "It’s quiet, reserved, and unbelievably powerful, "
+                ['GCP', "It's quiet, reserved, and unbelievably powerful, "
                 "like a space-faring librarian with a PhD in parallel processing."],
                 ['Google BigQuery', "You don't ask BigQuery to process petabytes; "
                 "you merely suggest the possibility of a query, and before you "
